@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Actividad 2 · MVC con Spring Boot</title>
+  <meta name="description" content="Panel de inicio: acceso rápido a todas las vistas y endpoints de la Actividad 2 (Tema 4).">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="cabecera">
+  <div class="contenedor">
+    <a class="marca" href="index.html" id="marca">INICIALESact2_t4</a>
+    <nav class="menu">
+      <a href="#vistas">Vistas</a>
+      <a href="#endpoints">Endpoints</a>
+      <a href="#post">POST</a>
+      <a href="#verificar">Verificar</a>
+    </nav>
+  </div>
+</header>
+
+<main class="contenedor">
+
+  <!-- ===== Portada ===== -->
+  <section>
+    <span class="etiqueta">Actividad 2 · Tema 4</span>
+    <h1>MVC con Spring Boot y Thymeleaf</h1>
+    <p class="sub">Panel para revisar el proyecto sin escribir URLs a mano: cada tarjeta corresponde a un video de la
+      playlist (8 al 17) y abre la vista o endpoint donde se ve funcionando.</p>
+    <div class="tarjeta">
+      <h2>Estado del servidor</h2>
+      <ul class="estado-lista" id="estado">
+        <li><span><span class="punto"></span>Consultando…</span><span class="mono">/api/proyecto/estado</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== Vistas Thymeleaf ===== -->
+  <section id="vistas" style="margin-top:2.5rem">
+    <h2>Vistas Thymeleaf (HTML desde el servidor)</h2>
+    <div class="rejilla">
+      <article class="tarjeta">
+        <span class="video">Videos 9 · 12</span>
+        <h2>Lista con th:each</h2>
+        <p>Objeto <code>Model</code> + directiva <code>th:each</code> recorriendo las materias.</p>
+        <div class="enlaces"><a class="boton" href="materias">Abrir lista</a></div>
+      </article>
+      <article class="tarjeta">
+        <span class="video">Video 13</span>
+        <h2>Formulario @ModelAttribute</h2>
+        <p>Captura una materia, valida el DTO y muestra el resultado.</p>
+        <div class="enlaces"><a class="boton" href="materias/nueva">Abrir formulario</a></div>
+      </article>
+      <article class="tarjeta">
+        <span class="video">Video 14</span>
+        <h2>Filtro con @RequestParam</h2>
+        <p>La lista recibe <code>?area=</code> para filtrar por categoría.</p>
+        <div class="enlaces">
+          <a class="boton" href="materias?area=Redes">Redes</a>
+          <a class="boton suave" href="materias?area=Programaci%C3%B3n">Programación</a>
+        </div>
+      </article>
+      <article class="tarjeta">
+        <span class="video">Video 15</span>
+        <h2>Detalle con @PathVariable</h2>
+        <p>El id viaja en la ruta: <code>/materias/{id}</code>.</p>
+        <div class="enlaces">
+          <a class="boton" href="materias/1">Materia 1</a>
+          <a class="boton suave" href="materias/99">Id inexistente (404)</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== Endpoints REST ===== -->
+  <section id="endpoints" style="margin-top:2.5rem">
+    <h2>Endpoints REST (JSON)</h2>
+    <div class="rejilla">
+      <article class="tarjeta">
+        <span class="video">Videos 8 · 11</span>
+        <h2>Lista como DTO</h2>
+        <p>Los mismos datos, pero en JSON usando <code>MateriaDTO</code>.</p>
+        <div class="enlaces"><a class="boton" href="api/materias">GET /api/materias</a></div>
+      </article>
+      <article class="tarjeta">
+        <span class="video">Videos 14 · 15</span>
+        <h2>Parámetros en la API</h2>
+        <p>Query string y variable de ruta también en JSON.</p>
+        <div class="enlaces">
+          <a class="boton" href="api/materias?area=Datos">?area=Datos</a>
+          <a class="boton suave" href="api/materias/2">/2</a>
+        </div>
+      </article>
+      <article class="tarjeta">
+        <span class="video">Video 17</span>
+        <h2>Valor con @Value</h2>
+        <p>Propiedad personalizada de <code>application.properties</code>; también aparece en el pie de las vistas.</p>
+        <div class="enlaces">
+          <a class="boton" href="api/proyecto/nombre">/nombre</a>
+          <a class="boton suave" href="api/proyecto/estado">/estado</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== Probador POST ===== -->
+  <section id="post" style="margin-top:2.5rem">
+    <h2>Probar el POST REST <span class="video" style="font-size:.75rem;color:var(--gris)">· Video 16</span></h2>
+    <div class="tarjeta">
+      <p style="margin-bottom:1rem">Envía un JSON a <code>POST /api/materias</code> igual que lo haría Postman o Bruno.</p>
+      <form class="formulario" id="form-post" style="max-width:none">
+        <div class="fila">
+          <div><label for="p-nombre">Nombre</label><input id="p-nombre" value="Estructuras de Datos" required></div>
+          <div><label for="p-area">Área</label><input id="p-area" value="Programación" required></div>
+        </div>
+        <div class="fila">
+          <div><label for="p-creditos">Créditos</label><input id="p-creditos" type="number" min="1" max="10" value="5" required></div>
+          <div><label for="p-semestre">Semestre</label><input id="p-semestre" type="number" min="1" max="12" value="2" required></div>
+        </div>
+        <div><button type="submit">Enviar POST</button></div>
+      </form>
+      <div class="resultado" id="post-resultado" hidden>
+        <p class="ayuda" id="post-estado"></p>
+        <pre><code id="post-json"></code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Verificador ===== -->
+  <section id="verificar" style="margin-top:2.5rem">
+    <h2>Verificación rápida</h2>
+    <div class="tarjeta">
+      <p style="margin-bottom:1rem">Hace una petición a cada ruta y marca si responde como se espera.</p>
+      <button type="button" id="btn-verificar">Probar todas las rutas</button>
+      <ul class="estado-lista resultado" id="verificacion"></ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <span>Spring Boot · Thymeleaf · DTO</span>
+    <span>Documentación completa en el <a href="https://github.com/" id="lnk-readme">README</a> del repositorio</span>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
