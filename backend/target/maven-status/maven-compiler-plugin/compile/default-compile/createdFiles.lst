@@ -1,0 +1,11 @@
+com\example\act2t4\controller\MateriaViewController.class
+com\example\act2t4\service\MateriaService.class
+com\example\act2t4\model\Materia.class
+com\example\act2t4\web\VistaGlobalAdvice.class
+com\example\act2t4\controller\MateriaController.class
+com\example\act2t4\Act2T4Application.class
+com\example\act2t4\config\ProyectoProperties.class
+com\example\act2t4\model\EstadoResponse.class
+com\example\act2t4\dto\MateriaDTO.class
+com\example\act2t4\dto\MateriaMapper.class
+com\example\act2t4\controller\ProyectoController.class

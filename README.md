@@ -104,15 +104,22 @@ Conexión a internet la primera vez (Maven descarga las dependencias). Puerto li
 
 ## 4. Cómo ejecutar el proyecto
 
-```bash
+```bash```
 # 1. Clonar el repositorio
+
+```
 git clone https://github.com/ErickOmar4/SREOactividad2_t4.git
-cd la carpeta del proyecto en donde aparecer el backend y el frontend 
+```
+dirigirse a la capeta del backend 
+```
+cd backend
+```
 
 # 2. Ejecutar las pruebas (opcional pero recomendado)
-mvn test
-
+``` mvn test
+```
 # 3. Arrancar la aplicación
+```
 mvn spring-boot:run
 ```
 
