@@ -1,0 +1,44 @@
+{
+  "info": {
+    "name": "SREOactividad2_t4",
+    "description": "Colección de pruebas de la Actividad 2. Variable base_url: http://localhost:9230 en local o http://179.197.84.34:9230 en el servidor.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [{ "key": "base_url", "value": "http://localhost:8080" }],
+  "item": [
+    {
+      "name": "POST /api/materias (válido → 201)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Estructuras de Datos\",\n  \"creditos\": 5,\n  \"semestre\": 2,\n  \"area\": \"Programación\"\n}" },
+        "url": { "raw": "{{base_url}}/api/materias", "host": ["{{base_url}}"], "path": ["api", "materias"] }
+      }
+    },
+    {
+      "name": "POST /api/materias (inválido → 400)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"\",\n  \"creditos\": 50,\n  \"semestre\": 2,\n  \"area\": \"Programación\"\n}" },
+        "url": { "raw": "{{base_url}}/api/materias", "host": ["{{base_url}}"], "path": ["api", "materias"] }
+      }
+    },
+    {
+      "name": "GET /api/materias",
+      "request": { "method": "GET", "url": { "raw": "{{base_url}}/api/materias", "host": ["{{base_url}}"], "path": ["api", "materias"] } }
+    },
+    {
+      "name": "GET /api/materias?area=Redes (@RequestParam)",
+      "request": { "method": "GET", "url": { "raw": "{{base_url}}/api/materias?area=Redes", "host": ["{{base_url}}"], "path": ["api", "materias"], "query": [{ "key": "area", "value": "Redes" }] } }
+    },
+    {
+      "name": "GET /api/materias/1 (@PathVariable)",
+      "request": { "method": "GET", "url": { "raw": "{{base_url}}/api/materias/1", "host": ["{{base_url}}"], "path": ["api", "materias", "1"] } }
+    },
+    {
+      "name": "GET /api/proyecto/estado",
+      "request": { "method": "GET", "url": { "raw": "{{base_url}}/api/proyecto/estado", "host": ["{{base_url}}"], "path": ["api", "proyecto", "estado"] } }
+    }
+  ]
+}
