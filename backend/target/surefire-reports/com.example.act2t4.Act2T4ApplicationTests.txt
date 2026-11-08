@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.example.act2t4.Act2T4ApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.171 s -- in com.example.act2t4.Act2T4ApplicationTests
