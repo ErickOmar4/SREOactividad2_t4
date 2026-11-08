@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: cabecera('Detalle')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: menu('')}"></header>
+
+<main class="contenedor">
+  <span class="etiqueta">Video 15 · @PathVariable</span>
+  <h1 th:text="${materia.nombre}">Materia</h1>
+  <p class="sub">Detalle obtenido con <code>@PathVariable</code>: la ruta
+    <code th:text="'/materias/' + ${materia.id}">/materias/1</code> trae el id.</p>
+
+  <!-- Mensaje temporal enviado con RedirectAttributes (flash) tras guardar el formulario -->
+  <div class="aviso" th:if="${mensaje}" th:text="${mensaje}">Guardado</div>
+
+  <div class="tarjeta">
+    <dl class="datos">
+      <dt>Id</dt><dd th:text="${materia.id}">1</dd>
+      <dt>Área</dt><dd th:text="${materia.area}">Área</dd>
+      <dt>Créditos</dt><dd th:text="${materia.creditos}">5</dd>
+      <dt>Semestre</dt><dd th:text="${materia.semestre}">3</dd>
+    </dl>
+  </div>
+
+  <p><a class="boton suave" th:href="@{/materias}">← Volver a la lista</a></p>
+</main>
+
+<footer th:replace="~{fragments/layout :: pie}"></footer>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: cabecera('Nueva materia')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: menu('nueva')}"></header>
+
+<main class="contenedor">
+  <span class="etiqueta">Video 13 · @ModelAttribute</span>
+  <h1>Nueva materia</h1>
+  <p class="sub">El formulario se enlaza con <code>MateriaDTO</code> mediante <code>th:object</code>
+    y llega al controlador con <code>@ModelAttribute</code>.</p>
+
+  <div class="tarjeta">
+    <!-- th:object: objeto del modelo ligado al formulario. th:field: enlaza cada campo con su propiedad. -->
+    <form class="formulario" th:action="@{/materias}" th:object="${materiaForm}" method="post" novalidate>
+      <div>
+        <label for="nombre">Nombre</label>
+        <input id="nombre" type="text" th:field="*{nombre}" th:errorclass="invalido" placeholder="Ej. Estructuras de Datos">
+        <p class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error</p>
+      </div>
+
+      <div>
+        <label for="area">Área</label>
+        <input id="area" type="text" th:field="*{area}" th:errorclass="invalido" list="lista-areas" placeholder="Ej. Programación">
+        <datalist id="lista-areas">
+          <option th:each="a : ${areas}" th:value="${a}"></option>
+        </datalist>
+        <p class="error" th:if="${#fields.hasErrors('area')}" th:errors="*{area}">Error</p>
+      </div>
+
+      <div class="fila">
+        <div>
+          <label for="creditos">Créditos (1-10)</label>
+          <input id="creditos" type="number" th:field="*{creditos}" th:errorclass="invalido" min="1" max="10">
+          <p class="error" th:if="${#fields.hasErrors('creditos')}" th:errors="*{creditos}">Error</p>
+        </div>
+        <div>
+          <label for="semestre">Semestre (1-12)</label>
+          <input id="semestre" type="number" th:field="*{semestre}" th:errorclass="invalido" min="1" max="12">
+          <p class="error" th:if="${#fields.hasErrors('semestre')}" th:errors="*{semestre}">Error</p>
+        </div>
+      </div>
+
+      <div>
+        <button type="submit">Guardar materia</button>
+        <a class="boton suave" th:href="@{/materias}">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</main>
+
+<footer th:replace="~{fragments/layout :: pie}"></footer>
+</body>
+</html>

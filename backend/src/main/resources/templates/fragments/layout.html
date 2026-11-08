@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<!--
+  Fragmentos reutilizables (Video 12: directivas th:fragment / th:replace).
+  Cada vista los incluye así:
+     <head th:replace="~{fragments/layout :: cabecera('Título')}"></head>
+     <header th:replace="~{fragments/layout :: menu('lista')}"></header>
+     <footer th:replace="~{fragments/layout :: pie}"></footer>
+-->
+<head th:fragment="cabecera(titulo)">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:text="${titulo} + ' · ' + ${proyectoNombre}">Materias</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header class="cabecera" th:fragment="menu(activo)">
+  <div class="contenedor">
+    <a class="marca" th:href="@{/index.html}" th:text="${proyectoNombre}">proyecto</a>
+    <nav class="menu">
+      <a th:href="@{/index.html}">Inicio</a>
+      <a th:href="@{/materias}" th:classappend="${activo == 'lista'} ? 'activo'">Lista</a>
+      <a th:href="@{/materias/nueva}" th:classappend="${activo == 'nueva'} ? 'activo'">Nueva materia</a>
+    </nav>
+  </div>
+</header>
+<footer class="pie" th:fragment="pie">
+  <div class="contenedor">
+    <!-- Estos valores vienen de application.properties gracias a @Value (VistaGlobalAdvice) -->
+    <span th:text="${proyectoLema}">lema</span>
+    <span>Autor: <strong th:text="${proyectoAutor}">autor</strong> · <span th:text="${proyectoNombre}">proyecto</span></span>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: cabecera('Materias')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: menu('lista')}"></header>
+
+<main class="contenedor">
+  <span class="etiqueta">Videos 9, 12 y 14</span>
+  <h1>Materias</h1>
+  <p class="sub">Lista renderizada en el servidor con <code>Model</code> y <code>th:each</code>.
+    Filtra por área con <code>@RequestParam</code> (<code>?area=Redes</code>).</p>
+
+  <!-- Filtros: cada chip es un enlace con ?area=... -->
+  <div class="chips">
+    <a class="chip" th:href="@{/materias}" th:classappend="${areaSeleccionada == ''} ? 'activo'">Todas</a>
+    <a class="chip" th:each="a : ${areas}"
+       th:href="@{/materias(area=${a})}"
+       th:text="${a}"
+       th:classappend="${a.equalsIgnoreCase(areaSeleccionada)} ? 'activo'">Área</a>
+  </div>
+
+  <div class="tarjeta tabla-caja">
+    <table>
+      <thead>
+      <tr><th>Id</th><th>Materia</th><th>Área</th><th>Créditos</th><th>Semestre</th></tr>
+      </thead>
+      <tbody>
+      <!-- th:each repite la fila por cada elemento de la lista "materias" -->
+      <tr th:each="m, fila : ${materias}">
+        <td th:text="${m.id}">1</td>
+        <td><a th:href="@{/materias/{id}(id=${m.id})}" th:text="${m.nombre}">Nombre</a></td>
+        <td th:text="${m.area}">Área</td>
+        <td th:text="${m.creditos}">5</td>
+        <td th:text="${m.semestre}">3</td>
+      </tr>
+      <!-- th:if muestra el mensaje solo si la lista está vacía -->
+      <tr th:if="${#lists.isEmpty(materias)}">
+        <td colspan="5" class="vacio">No hay materias para el filtro seleccionado.</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="ayuda" th:text="${#lists.size(materias)} + ' resultado(s)'">0 resultados</p>
+  <p><a class="boton" th:href="@{/materias/nueva}">+ Nueva materia</a></p>
+</main>
+
+<footer th:replace="~{fragments/layout :: pie}"></footer>
+</body>
+</html>
